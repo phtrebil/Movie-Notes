@@ -17,11 +17,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         >
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/barra_de_busca"
+        <SearchView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.cardview.widget.CardView>
 
 
@@ -35,8 +36,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:listitem="@layout/item_lista_de_filmes"
+        tools:listitem="@layout/item__lista_de_filmes"
         />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
