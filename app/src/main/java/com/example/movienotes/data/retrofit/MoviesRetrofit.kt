@@ -1,7 +1,6 @@
 package com.example.movienotes.data.retrofit
 
-import com.example.movienotes.model.Movies
-import okhttp3.OkHttpClient
+
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -30,5 +29,5 @@ interface BuscaMovies{
     @GET("?s={nome_movie}")
     fun buscaTodas(
         @Path("nome_movie") movie_nome: String
-    ): Call<List<Movies>>
+    ): Call<List<Void>>
 }
