@@ -25,6 +25,7 @@ interface BuscaMovies{
 
         "X-RapidAPI-Key: x",
         "X-RapidAPI-Host: x"
+
     )
     @GET("?s={nome_movie}")
     fun buscaTodas(
