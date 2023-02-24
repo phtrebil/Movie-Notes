@@ -44,10 +44,10 @@
             tools:text="Avengers" />
 
         <TextView
-            android:id="@+id/subtitulo_item"
+            android:id="@+id/ano_do_silme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="EndGame"
+            tools:text="2021"
             android:textSize="12sp"
             android:layout_margin="8dp"
             android:textAlignment="center"
