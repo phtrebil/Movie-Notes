@@ -1,6 +1,7 @@
 package com.example.movienotes.data.retrofit
 
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import com.example.movienotes.listeners.OnSerachApiListener
 import com.example.movienotes.model.Movies
@@ -12,6 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 class MoviesRetrofit(
     val context: Context
@@ -25,7 +27,7 @@ class MoviesRetrofit(
 
     val despensaService = resposta.create(BuscaMovies::class.java)
 
-    fun buscaFilmes(listener: OnSerachApiListener, nome_movie: String){
+    fun buscaFilmes(listener: OnSerachApiListener, nome_movie: String?){
         val call: Call<List<Movies>> = despensaService.buscaTodas(movie_nome = nome_movie)
         call.enqueue(object : Callback<List<Movies>?> {
             override fun onResponse(
@@ -37,6 +39,7 @@ class MoviesRetrofit(
                     return
                 }
                 listener.onResponse(response.body())
+                Toast.makeText(context, "cheguei aqui", Toast.LENGTH_SHORT)
             }
 
             override fun onFailure(call: Call<List<Movies>?>, t: Throwable) {
@@ -51,11 +54,11 @@ class MoviesRetrofit(
 interface BuscaMovies{
     @Headers(
         "Accept: application/json",
-        "X-RapidAPI-Key: x",
-        "X-RapidAPI-Host: x"
+        "X-RapidAPI-Key: ",
+        "X-RapidAPI-Host:"
     )
-    @GET("?s={nome_movie}")
+    @GET("?s=")
     fun buscaTodas(
-        @Path("nome_movie") movie_nome: String
+        @Query("nome_movie") movie_nome: String?
     ): Call<List<Movies>>
 }
