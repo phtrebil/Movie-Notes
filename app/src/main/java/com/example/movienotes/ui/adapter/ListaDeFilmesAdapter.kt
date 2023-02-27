@@ -10,7 +10,7 @@ import com.example.movienotes.model.Movies
 
 class ListaDeFilmesAdapter(
 
-    val context: Context,
+    private val context: Context,
     filmes: List<Movies> = emptyList(),
     var onItemClick: (movies: Movies) -> Unit = {}
 
@@ -25,9 +25,9 @@ class ListaDeFilmesAdapter(
 
         fun vincula(filme: Movies) {
             this.filme = filme
-            binding.tituloItem.text = filme.titulo
-            binding.anoDoSilme.text = filme.ano
-            binding.imagemItem.load(filme.imagem)
+            binding.tituloItem.text = filme.title
+            binding.anoDoSilme.text = filme.year
+            binding.imagemItem.load(filme.image)
         }
 
         init {
@@ -43,10 +43,12 @@ class ListaDeFilmesAdapter(
         return ViewHolder(ItemListaDeFilmesBinding.inflate(inflater, parent, false))
     }
 
-    override fun getItemCount(): Int = filmes.size
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val filme = filmes[position]
         holder.vincula(filme)
     }
+
+    override fun getItemCount(): Int = filmes.size
+
+
 }

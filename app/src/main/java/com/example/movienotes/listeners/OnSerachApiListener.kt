@@ -1,8 +1,8 @@
 package com.example.movienotes.listeners
 
-import com.example.movienotes.model.Movies
+import com.example.movienotes.model.RespostaMovieApi
 
 interface OnSerachApiListener {
-    fun onResponse(resposta: List<Movies>?)
+    fun onResponse(resposta: RespostaMovieApi?)
     fun OnError(mensagem: String?)
 }

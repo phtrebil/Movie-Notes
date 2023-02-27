@@ -1,10 +1,9 @@
 package com.example.movienotes.data.retrofit
 
 import android.content.Context
-import android.util.Log
 import android.widget.Toast
 import com.example.movienotes.listeners.OnSerachApiListener
-import com.example.movienotes.model.Movies
+import com.example.movienotes.model.RespostaMovieApi
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,44 +20,43 @@ class MoviesRetrofit(
 
 
     val resposta = Retrofit.Builder()
-        .baseUrl("https://mdblist.p.rapidapi.com/?i=tt0073195")
+        .baseUrl("https://mdblist.p.rapidapi.com")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
     val despensaService = resposta.create(BuscaMovies::class.java)
 
-    fun buscaFilmes(listener: OnSerachApiListener, nome_movie: String?){
-        val call: Call<List<Movies>> = despensaService.buscaTodas(movie_nome = nome_movie)
-        call.enqueue(object : Callback<List<Movies>?> {
+    fun buscaFilmes(listener: OnSerachApiListener, movie_nome: String?) {
+        val call: Call<RespostaMovieApi> = despensaService.buscaTodas(movie_nome)
+        call.enqueue(object : Callback<RespostaMovieApi> {
             override fun onResponse(
-                call: Call<List<Movies>?>,
-                response: Response<List<Movies>?>
+                call: Call<RespostaMovieApi>,
+                response: Response<RespostaMovieApi>
             ) {
-                if(!response.isSuccessful){
-                    Toast.makeText(context, "Filme não localizado", Toast.LENGTH_SHORT)
+                if (!response.isSuccessful) {
+                    Toast.makeText(context, "Filme não localizado", Toast.LENGTH_SHORT).show()
                     return
                 }
                 listener.onResponse(response.body())
-                Toast.makeText(context, "cheguei aqui", Toast.LENGTH_SHORT)
+                Toast.makeText(context, "cheguei aqui", Toast.LENGTH_SHORT).show()
             }
 
-            override fun onFailure(call: Call<List<Movies>?>, t: Throwable) {
+            override fun onFailure(call: Call<RespostaMovieApi>, t: Throwable) {
                 listener.OnError(t.message)
             }
         })
-
-
     }
 }
 
-interface BuscaMovies{
+interface BuscaMovies {
     @Headers(
-        "Accept: application/json",
-        "X-RapidAPI-Key: ",
-        "X-RapidAPI-Host:"
+
+            "Accept: application/json",
+            "X-RapidAPI-Key: b473f84f12mshf183cf88d4c2d1cp122916jsn5c71e4b91f03",
+            "X-RapidAPI-Host: https://mdblist.p.rapidapi.com"
+
     )
-    @GET("?s=")
-    fun buscaTodas(
-        @Query("nome_movie") movie_nome: String?
-    ): Call<List<Movies>>
+
+    @GET("/")
+    fun buscaTodas(@Query("s") movie_nome: String?): Call<RespostaMovieApi>
 }
