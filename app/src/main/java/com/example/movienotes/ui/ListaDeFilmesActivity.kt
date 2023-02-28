@@ -48,9 +48,11 @@ class ListaDeFilmesActivity : AppCompatActivity() {
     val listener = object : OnSerachApiListener {
         override fun onResponse(resposta: RespostaMovieApi?) {
             if(resposta==null){
-               return
+                Toast.makeText(baseContext, "Resposta nula", Toast.LENGTH_SHORT).show()
+                return
             }
-            adapter.atualiza(resposta.results)
+            resposta?.let { adapter.atualiza(it.results) }
+            Toast.makeText(baseContext, "Resposta não nula", Toast.LENGTH_SHORT).show()
         }
 
         override fun OnError(mensagem: String?) {

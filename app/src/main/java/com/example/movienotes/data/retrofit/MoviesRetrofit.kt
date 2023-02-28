@@ -10,7 +10,6 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Headers
 import retrofit2.http.Query
 
 class MoviesRetrofit(
@@ -49,7 +48,7 @@ class MoviesRetrofit(
 interface BuscaMovies {
     @GET("3/search/movie")
     fun buscaMovies(
-        @Query("q") movie_nome: String?,
+        @Query("query") movie_nome: String?,
         @Query("api_key") apiKey: String = "c78edd48fe96ba6a9e5d60d02baeb679"
     )
     : Call<RespostaMovieApi>
