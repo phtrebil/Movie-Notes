@@ -26,8 +26,8 @@ class ListaDeFilmesAdapter(
         fun vincula(filme: Movies) {
             this.filme = filme
             binding.tituloItem.text = filme.title
-            binding.anoDoSilme.text = filme.year
-            binding.imagemItem.load(filme.image)
+            binding.anoDoSilme.text = filme.release_date
+            binding.imagemItem.load(filme.poster_path)
         }
 
         init {
@@ -49,6 +49,12 @@ class ListaDeFilmesAdapter(
     }
 
     override fun getItemCount(): Int = filmes.size
+
+    fun atualiza(filmes: List<Movies>){
+        this.filmes.clear()
+        this.filmes.addAll(filmes)
+        notifyDataSetChanged()
+    }
 
 
 }

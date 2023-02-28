@@ -11,7 +11,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Headers
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 class MoviesRetrofit(
@@ -20,14 +19,14 @@ class MoviesRetrofit(
 
 
     val resposta = Retrofit.Builder()
-        .baseUrl("https://mdblist.p.rapidapi.com")
+        .baseUrl("https://api.themoviedb.org/")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
     val despensaService = resposta.create(BuscaMovies::class.java)
 
     fun buscaFilmes(listener: OnSerachApiListener, movie_nome: String?) {
-        val call: Call<RespostaMovieApi> = despensaService.buscaTodas(movie_nome)
+        val call: Call<RespostaMovieApi> = despensaService.buscaMovies(movie_nome)
         call.enqueue(object : Callback<RespostaMovieApi> {
             override fun onResponse(
                 call: Call<RespostaMovieApi>,
@@ -38,7 +37,6 @@ class MoviesRetrofit(
                     return
                 }
                 listener.onResponse(response.body())
-                Toast.makeText(context, "cheguei aqui", Toast.LENGTH_SHORT).show()
             }
 
             override fun onFailure(call: Call<RespostaMovieApi>, t: Throwable) {
@@ -49,14 +47,10 @@ class MoviesRetrofit(
 }
 
 interface BuscaMovies {
-    @Headers(
-
-            "Accept: application/json",
-            "X-RapidAPI-Key: b473f84f12mshf183cf88d4c2d1cp122916jsn5c71e4b91f03",
-            "X-RapidAPI-Host: https://mdblist.p.rapidapi.com"
-
+    @GET("3/search/movie")
+    fun buscaMovies(
+        @Query("q") movie_nome: String?,
+        @Query("api_key") apiKey: String = "c78edd48fe96ba6a9e5d60d02baeb679"
     )
-
-    @GET("/")
-    fun buscaTodas(@Query("s") movie_nome: String?): Call<RespostaMovieApi>
+    : Call<RespostaMovieApi>
 }

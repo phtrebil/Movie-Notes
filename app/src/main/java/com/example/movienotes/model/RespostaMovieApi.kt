@@ -1,8 +1,9 @@
 package com.example.movienotes.model
 
 class RespostaMovieApi (
-    val search : List<Movies>,
-    val total: Int,
-    val response: Boolean
+    val page: Int,
+    val results : List<Movies>,
+    val total_pages: Int,
+    val total_results: Int
     ){
 }

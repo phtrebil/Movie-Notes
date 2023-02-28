@@ -1,10 +1,10 @@
 package com.example.movienotes.model
 
 class Movies(
-     val id: String,
+     val id: Int,
      val title: String,
-     val image: String,
-     val year: String
+     val poster_path: String,
+     val release_date: String
 ) {
 
 }

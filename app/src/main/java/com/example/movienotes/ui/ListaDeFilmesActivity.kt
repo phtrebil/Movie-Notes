@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.movienotes.data.retrofit.MoviesRetrofit
 import com.example.movienotes.databinding.ActivityListaDeFilmesBinding
 import com.example.movienotes.listeners.OnSerachApiListener
-import com.example.movienotes.model.Movies
 import com.example.movienotes.model.RespostaMovieApi
 import com.example.movienotes.ui.adapter.ListaDeFilmesAdapter
 
@@ -22,15 +21,25 @@ class ListaDeFilmesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        val retrofit = MoviesRetrofit(this)
+        configuraBusca(retrofit)
+        configuraRecyclerView()
 
-        binding.busca.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+    }
+
+    private fun configuraRecyclerView() {
+        binding.rvListaDeFilmes.adapter = adapter
+        binding.rvListaDeFilmes.layoutManager = GridLayoutManager(this, 2)
+    }
+
+    private fun configuraBusca(retrofit: MoviesRetrofit) {
+        binding.busca.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(p0: String?): Boolean {
                 return false
             }
 
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-                MoviesRetrofit(this@ListaDeFilmesActivity)
-                    .buscaFilmes(listener,p0)
+            override fun onQueryTextSubmit(filmeBuscado: String?): Boolean {
+                retrofit.buscaFilmes(listener, filmeBuscado)
                 return true
             }
         })
@@ -39,30 +48,18 @@ class ListaDeFilmesActivity : AppCompatActivity() {
     val listener = object : OnSerachApiListener {
         override fun onResponse(resposta: RespostaMovieApi?) {
             if(resposta==null){
-                Toast.makeText(this@ListaDeFilmesActivity,
-                    "Filme não encontrado",
-                    Toast.LENGTH_SHORT)
-                    .show()
-                return
+               return
             }
-            mostraResultado(resposta)
+            adapter.atualiza(resposta.results)
         }
 
         override fun OnError(mensagem: String?) {
-            Toast.makeText(this@ListaDeFilmesActivity,
+            Toast.makeText(baseContext,
             "um erro aconteceu",
             Toast.LENGTH_SHORT)
                 .show()
         }
         
-    }
-
-    private fun mostraResultado(resposta: RespostaMovieApi) {
-        binding.rvListaDeFilmes.setHasFixedSize(true)
-        binding.rvListaDeFilmes.layoutManager = GridLayoutManager(this@ListaDeFilmesActivity, 2)
-        adapter = ListaDeFilmesAdapter(this@ListaDeFilmesActivity, resposta.search)
-        binding.rvListaDeFilmes.adapter = adapter
-
     }
 
 }
