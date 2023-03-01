@@ -1,5 +1,6 @@
-package com.example.movienotes.ui
+package com.example.movienotes.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.SearchView
 import android.widget.Toast
@@ -30,6 +31,16 @@ class ListaDeFilmesActivity : AppCompatActivity() {
     private fun configuraRecyclerView() {
         binding.rvListaDeFilmes.adapter = adapter
         binding.rvListaDeFilmes.layoutManager = GridLayoutManager(this, 2)
+        adapter.onItemClick = {
+            val intent = Intent(
+                this,
+                DetalhesActivity::class.java
+            )
+                .apply {
+                    putExtra("filme", it)
+                }
+            startActivity(intent)
+        }
     }
 
     private fun configuraBusca(retrofit: MoviesRetrofit) {
@@ -47,7 +58,7 @@ class ListaDeFilmesActivity : AppCompatActivity() {
 
     val listener = object : OnSerachApiListener {
         override fun onResponse(resposta: RespostaMovieApi?) {
-            if(resposta==null){
+            if (resposta == null) {
                 Toast.makeText(baseContext, "Resposta nula", Toast.LENGTH_SHORT).show()
                 return
             }
@@ -56,12 +67,14 @@ class ListaDeFilmesActivity : AppCompatActivity() {
         }
 
         override fun OnError(mensagem: String?) {
-            Toast.makeText(baseContext,
-            "um erro aconteceu",
-            Toast.LENGTH_SHORT)
+            Toast.makeText(
+                baseContext,
+                "um erro aconteceu",
+                Toast.LENGTH_SHORT
+            )
                 .show()
         }
-        
+
     }
 
 }

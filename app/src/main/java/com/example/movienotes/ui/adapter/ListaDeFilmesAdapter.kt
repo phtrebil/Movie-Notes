@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.example.movienotes.R
 import com.example.movienotes.databinding.ItemListaDeFilmesBinding
 import com.example.movienotes.model.Movies
 
@@ -27,7 +28,10 @@ class ListaDeFilmesAdapter(
             this.filme = filme
             binding.tituloItem.text = filme.title
             binding.anoDoSilme.text = filme.release_date
-            binding.imagemItem.load(filme.poster_path)
+            binding.imagemItem.load(filme.poster_path){
+                fallback(R.drawable.erro)
+                error(R.drawable.erro)
+            }
         }
 
         init {

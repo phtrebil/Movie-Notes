@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/purple_200"
 
-    tools:context=".ui.ListaDeFilmesActivity">
+    tools:context=".ui.activity.ListaDeFilmesActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview"
