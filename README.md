@@ -2,10 +2,10 @@
 
 Aplicativo que faz busca de filmes e mostra detalhes.
 
-App consome uma api Web para realizar a busca de filmes por meio de seu título. Realizada a busca é possível clicar na caixa do item para abrir a tela de detalhes.
-O app ainda não está finalizado. Pretende-se deixar que o usuário escolha o filme de sua preferência faça anotações pessoais sobre o filme e deixe salva essas informações
+App consome uma api Web para realizar a busca de filmes por meio de seu título. Após realizada a busca, é possível clicar na caixa do item para abrir a tela de detalhes.
+O app ainda não está finalizado. Pretende-se deixar que o usuário escolha o filme de sua preferência, faça anotações pessoais sobre o filme e deixe salvas essas informações,
 localmente no aparelho. Também se tem problemas com os endereços das imagens disponibilizadas pela API, tendo em vista que não é possível carregá-las.
-Por enquanto o app apresenta duas telas.
+Por enquanto, o app apresenta duas telas.
 
 <h4 align="center"> 
 :construction: Projeto em construção :construction:
@@ -32,7 +32,7 @@ Implementado
 A Implementar
 </h5>
 
--  Barra de Pesquisa precisa responder click em todo o corpo (no momento só aceita click na lupa).
+-  Barra de pesquisa precisa responder click em todo o corpo (no momento, só aceita click na lupa).
 -  Carregar imagem do poster dos filmes
 
 <h5>
