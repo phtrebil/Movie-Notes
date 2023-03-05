@@ -32,6 +32,8 @@ Implementado
 A Implementar
 </h5>
 
+
+
 -  Barra de pesquisa precisa responder click em todo o corpo (no momento, só aceita click na lupa).
 -  Carregar imagem do poster dos filmes
 
@@ -56,4 +58,11 @@ A Implementar
 
 -  Carregar imagem do poster do filme.
 -  Fazer o chainConstraint entre os elementos de textview para não encavalar o texto sobre texto.
+
+| :placard: Vitrine.Dev |     |
+| -------------  | --- |
+| :sparkles: Nome        | **Movie-Notes**
+| :label: Tecnologias | kotlin, retrofit, recyclerView
+| :rocket: URL         |https://github.com/phtrebil/Movie-Notes
+| :fire: Desafio     |https://github.com/phtrebil/Movie-Notes
 
